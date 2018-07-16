@@ -1,0 +1,30 @@
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" routerLink="/">Wissen Technology</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a [routerLink]="homeUrl()">Home</a></li>
+			<li *ngIf="!log"><a routerLink="/login">Login</a></li>
+			<li *ngIf="log"><a (click)="logout()">Logout</a></li>
+			<li><a [routerLink]="approverUrl()">Approver</a></li>
+			<li><a [routerLink]="payrollUrl()">Payroll</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<form class="navbar-form" role="search">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search"
+							name="srch-term" id="srch-term">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</li>
+		</ul>
+	</div>
+</nav>
+<router-outlet></router-outlet>

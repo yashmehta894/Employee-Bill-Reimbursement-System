@@ -1,0 +1,56 @@
+<!--<div class="item-margin">
+
+  <div class="container">
+
+    <div class="row" (click)="toggleExpand(report.ReportId)">
+      <div class="col-md-1">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="col-md-2" style="text-align:center">{{report.ReportId}}</div>
+      <div class="col-md-2" style="text-align:center">{{report.DateOfSubmission}}</div>
+      <div class="col-md-1" style="text-align:center">{{report.Status}}</div>
+      <div class="col-md-2" style="text-align:center">{{report.Amount}}</div>
+      <div class="col-md-2" style="text-align:center">{{report.ApprovedBy}}</div>
+      <div class="col-md-2" style="text-align:center">{{report.Costcenter}}</div>
+    </div>
+
+    <div *ngIf="expand && !edit" (click)="toggleExpand(report.ReportId)">
+      <div class="row top-margin">
+        <div class="col-md-1" *ngFor="let column of billsColumn">{{column}}</div>
+      </div>
+      <div class="row" *ngFor="let bill of bills">
+        <div class="top-margin">
+          <div class="col-md-1">{{bill.billNo}}</div>
+          <div class="col-md-1">{{bill.billType}}</div>
+          <div class="col-md-1">{{bill.billId}}</div>
+          <div class="col-md-1">{{bill.amount}}</div>
+          <div class="col-md-1">{{bill.path}}</div>
+          <div class="col-md-2">{{bill.billDate}}</div>
+        </div>
+      </div>
+      <div *ngIf="editButton">
+        <button class="btn btn-primary" (click)="makeEdit($event)">Edit</button>
+      </div>
+    </div>
+
+    <div *ngIf="edit">
+      <div class="row top-margin" (click)="toggleExpand(report.ReportId)">
+        <div class="col-md-1" *ngFor="let column of billsColumn">{{column}}</div>
+      </div>
+      <div class="row" *ngFor="let bill of bills">
+        <div class="top-margin">
+          <form>
+            <input class="col-md-1" type="text" value="{{bill.billNo}}">
+            <input class="col-md-1" type="text" value="{{bill.billType}}">
+            <input class="col-md-1" type="text" value="{{bill.billId}}">
+            <input class="col-md-1" type="text" value="{{bill.amount}}">
+            <input class="col-md-1" type="text" value="{{bill.path}}">
+            <input class="col-md-2" type="text" value="{{bill.billDate}}">
+          </form>
+        </div>
+      </div>
+      <button class="btn btn-primary" (click)="makeEdit($event)">Resubmit</button>
+    </div>
+  </div>-->
+
+  

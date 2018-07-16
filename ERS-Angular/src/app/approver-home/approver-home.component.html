@@ -1,0 +1,11 @@
+<!-- <div class="container">
+	<button class="btn btn-primary" (click)="getReportById(2)">Report by ID</button>
+	<button class="btn btn-primary" (click)="getReportByLevelAndCenter(1,1)">Report by Level and Center</button>
+	<button class = "btn btn-primary" (click) = "getBills(1)">Get Bills</button>
+</div> -->
+
+<!-- <app-item-list [items]='reports'></app-item-list> -->
+<button class="btn btn-primary" routerLink="/history"
+	style="margin: 10px">Previous Reports</button>
+<app-report-list [reports]='reports'></app-report-list>
+

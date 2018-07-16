@@ -1,0 +1,38 @@
+<div class="text-center">
+	<ul class="pagination ">
+		<li><a (click)="onReportClick('submitReports')">Submitted
+				Reports</a></li>
+		<li><a (click)="onReportClick('approvedReports')">Approved
+				Reports</a></li>
+		<li><a (click)="onReportClick('paidReports')">Paid Reports</a></li>
+		<li><a (click)="onReportClick('rejectedReports')">Rejected
+				Reports</a></li>
+		<li><a (click)="onReportClick('savedReports')">Saved Reports</a></li>
+	</ul>
+
+
+	<span class="pull-right" style="margin: 30px"><a
+		routerLink="/add" class="btn btn-primary">Add Report</a></span>
+
+</div>
+
+<div class="container" *ngIf="isSubmittedReport">
+	<app-submitter-report-list [submittedReports]="submittedReports"></app-submitter-report-list>
+
+</div>
+<div class="container" *ngIf="isApprovedReport">
+	<app-submitter-report-list [submittedReports]="approvedReports"></app-submitter-report-list>
+
+</div>
+<div class="container" *ngIf="isRejectedReport">
+	<app-submitter-report-list [submittedReports]="rejectedReports"></app-submitter-report-list>
+
+</div>
+<div class="container" *ngIf="isPaidReport">
+	<app-submitter-report-list [submittedReports]="paidReports"></app-submitter-report-list>
+
+</div>
+<div class="container" *ngIf="isSavedReport">
+	<app-submitter-report-list [submittedReports]="savedReports"></app-submitter-report-list>
+
+</div>

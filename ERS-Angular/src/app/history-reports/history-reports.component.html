@@ -1,0 +1,49 @@
+<div class="container">
+	<span class="pull-right"> <a class="btn btn-primary"
+		[routerLink]="goToSubmitter()">Submit Bills</a></span>
+
+	<div class="table-users">
+		<div class="header">Reports</div>
+		<table cellspacing="0">
+			<thead>
+				<tr>
+					<th>Report Id</th>
+					<th>Employee Name</th>
+					<th>Date Of Submission</th>
+					<th>Status</th>
+					<th>Amount</th>
+					<th>Paid</th>
+					<th>Reject</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let report of reports">
+					<td>{{report.reportId}}</td>
+					<td>{{report.employee.name}}</td>
+					<td>{{report.date}}</td>
+					<td>{{report.status}}</td>
+					<td>{{report.totalAmount}}</td>
+					<td (click)='updateReport(report,"PAID")' data-toggle="modal"
+						data-target="#myModal"><i class="fa fa-check-circle fa-2x"
+						aria-hidden="true"></i></td>
+					<td (click)='updateReport(report, "PAYROLL_REJECTED")'
+						data-toggle="modal" data-target="#myModal"><i
+						class="fa fa-times-circle fa-2x" aria-hidden="true"></i></td>
+					<button type="button" class="btn btn-primary"
+						[id]="report.ReportId"
+						(click)="Billdetails(report.reportId,report.status)">{{detailsButton}}</button>
+					<!--<button type="button" class="btn btn-danger pull-right" *ngIf="checkEdit(report.Status)">Edit</button>-->
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<bills *ngIf="viewBills" [reportId]="currentReportId"
+		[reportStatus]="currentReportStatus" [bills]="bills"></bills>
+	<span class="pull-right">
+		<button *ngIf="viewBills" class="btn btn-primary" type="button"
+			(click)="hideBillDetails()">Hide</button>
+	</span>
+
+</div>

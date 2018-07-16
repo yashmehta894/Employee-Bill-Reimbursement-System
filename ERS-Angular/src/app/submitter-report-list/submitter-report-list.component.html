@@ -1,0 +1,61 @@
+<!--<div class="item-margin ">
+  <div class="container">
+    <div class="row">      
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2" style="text-align:center">ReportId</div>
+        <div class="col-md-2" style="text-align:center">Date Of Submission</div>
+        <div class="col-md-1" style="text-align:center">Status</div>
+        <div class="col-md-2" style="text-align:center">Amount</div>
+        <div class="col-md-2" style="text-align:center">ApprovedBy</div>
+        <div class="col-md-2" style="text-align:center">Costcenter</div>
+      </div>
+  </div>
+  <report *ngFor="let report of reports" [report]="report"></report>
+
+</div>
+-->
+
+<div class="container-fluid">
+	<div class="header">Records</div>
+	<table cellspacing="0">
+		<thead>
+			<tr>
+				<td>ReportId</td>
+				<td>Date Of Submission</td>
+				<td>Status</td>
+				<td>Amount</td>
+				<td>ApprovedBy</td>
+				<td>Costcenter</td>
+				<td>Details</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let report of submittedReports">
+				<td>{{report.reportId}}</td>
+				<td>{{report.date}}</td>
+				<td>{{report.status}}</td>
+				<td>{{report.totalAmount}}</td>
+				<td>{{report.approvedBy}}</td>
+				<td>{{report.costCenter}}</td>
+				<td class="minimal_cell">
+					<button type="button" class="btn btn-primary"
+						[id]="report.reportId"
+						(click)="Billdetails(report.reportId,report.status)">Details
+					</button>
+				</td>
+				<!--<button type="button" class="btn btn-danger pull-right" *ngIf="checkEdit(report.Status)">Edit</button>-->
+			</tr>
+		</tbody>
+	</table>
+	<br>
+</div>
+<br>
+<div>
+	<app-submitter-bills *ngIf="viewBills" [reportId]="currentReportId"
+		[reportStatus]="currentReportStatus" [bills]="bills">
+	</app-submitter-bills>
+
+
+</div>
+

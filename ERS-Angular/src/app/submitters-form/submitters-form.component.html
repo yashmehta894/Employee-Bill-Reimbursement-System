@@ -1,0 +1,190 @@
+
+<app-employee-details></app-employee-details>
+
+<div class="table-users">
+	<div class="header">Bills</div>
+	<table cellspacing="0">
+		<thead>
+			<tr>
+				<th>Bill No</th>
+				<th>Bill Type</th>
+				<th>Bill Date</th>
+				<th>Amount</th>
+				<th>Attachment</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let bill of bills">
+				<td>{{bill.billNo}}</td>
+				<td>{{bill.billType}}</td>
+				<td>{{bill.billDate}}</td>
+				<td>{{bill.amount}}</td>
+				<td><img [src]="src" [hidden]="!src"><br></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br>
+	<form #submitterForm="ngForm">
+
+		<div class="form-group">
+			<div class="pull-left">
+				<h6>Cost Center:</h6>
+
+				<select #sel (change)='select(sel.value)' ngModel name="costCenter">
+					<option>--</option>
+					<option *ngFor="let costcenter of costCenters"
+						value="{{costcenter.centerId}}">
+                       {{costcenter.centerName}}
+                     </option>
+				</select>
+			</div>
+			<div class="pull-left">
+				<h6>Approver:</h6>
+				<select ngModel name="approverName">
+					<option value="{{mgrId}}">{{mgrName}}</option>
+					<option *ngFor="let approver of approvers"
+						value="{{approver.empId}}">
+                       {{approver.name}}
+                     </option>
+				</select>
+			</div>
+		</div>
+		<div>
+		<button class="btn btn-primary pull-right" data-toggle="modal"
+			data-target="#myModal">Add</button>
+		</div>
+		<br>
+		<h6>Comments</h6>
+		<textarea class="formcontrol" cols="50" rows="5" name="comments"> </textarea>
+		<div>
+		<button type="submit" (click)="onFormSubmit(submitterForm)"
+			class="btn btn-primary pull-right">Submit</button>
+		</div>
+		<br/>
+	</form>
+
+</div>
+
+
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Submit Form</h4>
+			</div>
+			<div class="modal-body">
+				<form [formGroup]="billForm">
+					<div class="form-group"
+						[class.has-error]="billForm.get('billNo').touched
+                                                   && billForm.get('billNo').errors">
+						<input type="text" formControlName="billNo"
+							class="form-control input-underline input-lg" id=""
+							placeholder="Enter Bill No" value="" style="width: 150px">
+						<div class="help-block">
+							<span
+								*ngIf="billForm.get('billNo').touched && billForm.get('billNo').errors">
+								Bill No is required </span>
+
+						</div>
+					</div>
+					<div class="form-group"
+						[class.has-error]="billForm.get('billType').touched
+                                                   && billForm.get('billType').errors">
+						<select class="form-control" required formControlName="billType"
+							style="width: 200px">
+							<option value="$">--Please Select--</option>
+							<option value="CAB">CAB</option>
+							<option value="AIRFARE">AIRFARE</option>
+							<option value="HOTEL">HOTEL</option>
+							<option value="FOOD">FOOD</option>
+							<option value="MISCELLANEOUS">MISCELLANEOUS</option>
+						</select>
+						<div class="help-block">
+							<span
+								*ngIf="billForm.get('billType').touched && billForm.get('billType').errors">
+								Bill Type is required </span>
+
+						</div>
+
+					</div>
+					<div class="form-group"
+						[class.has-error]="billForm.get('billDate').touched
+                                                   && billForm.get('billDate').errors">
+						<input type="date" formControlName="billDate"
+							class="form-control input-underline input-lg" id=""
+							placeholder="Enter Bill Date">
+						<div class="help-block">
+							<span
+								*ngIf="billForm.get('billDate').touched && billForm.get('billDate').errors">
+								Bill Date is required </span>
+
+						</div>
+
+					</div>
+					<div class="form-group"
+						[class.has-error]="billForm.get('amount').touched
+                                                   && billForm.get('amount').errors">
+						<input type="text" formControlName="amount"
+							class="form-control input-underline input-lg" id=""
+							placeholder="Enter Amount" style="width: 150px">
+						<div class="help-block">
+							<span
+								*ngIf="billForm.get('amount').touched && billForm.get('amount').errors">
+								Amount is required </span>
+
+						</div>
+
+					</div>
+					<!-- <div class="form-group">
+						<input type="file" formControlName="path"
+							class="form-control input-underline input-lg" id=""
+							(change)="fileEvent($event)">
+
+
+					</div> -->
+						<img [src]="src" [hidden]="!src"><br> <input type="file"
+						imageUpload (imageSelected)="selected($event)" 
+						[resizeOptions]="resizeOptions" formControlName="path" [formControl]="ctrl">
+					<!-- <image-upload [(ngModel)]="imageUploadModel" 
+						              [upload-config]="imageUploadConfig" 
+						              (onError)="onError($event)"></image-upload> -->
+
+
+					<!-- <div class="form-group">
+						<label for="single">single</label> <input type="file"
+							class="form-control" name="single" ng2FileSelect
+							[uploader]="uploader" />
+					</div> -->
+				</form>
+			</div>
+
+			<div class="modal-footer">
+
+				<button [disabled]="!isValidForm()" type="button" (click)="saveBill($event)"
+					class="btn btn-primary" data-dismiss="modal">Save</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+
+
+
+<style>
+input.form-control {
+	width: auto;
+}
+</style>
+

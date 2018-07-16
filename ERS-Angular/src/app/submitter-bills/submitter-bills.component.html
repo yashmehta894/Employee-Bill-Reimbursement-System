@@ -1,0 +1,54 @@
+<h1 style="text-align: center">Bills of report id - {{reportId}}</h1>
+
+<div class="conatiner-fluid">
+	<table class="responstable">
+		<thead>
+			<tr>
+				<td *ngFor="let column of billsColumn">{{column}}</td>
+			</tr>
+		</thead>
+		<tbody *ngIf="checkEdit()">
+			<tr *ngFor="let bill of bills">
+				<td><input class="col-md-10 col-sm-10 col-xs-10" type="text"
+					value="{{bill.billNo}}" [(ngModel)]="bill.billNo"></td>
+				<td><select class="col-md-10 col-sm-10 col-xs-10" type="text"
+					value="{{bill.billType}}" [(ngModel)]="bill.billType">
+						<option value="$">--Please Select--</option>
+						<option value="CAB">CAB</option>
+						<option value="AIRFARE">AIRFARE</option>
+						<option value="HOTEL">HOTEL</option>
+						<option value="FOOD">FOOD</option>
+						<option value="MISCELLANEOUS">MISCELLANEOUS</option>
+				</select></td>
+				<td><input class="col-md-10 col-sm-10 col-xs-10" type="text"
+					value="{{bill.amount}}" [(ngModel)]="bill.amount" ></td>
+				<td><!-- <input class="col-md-10 col-sm-10 col-xs-10" type="file"
+					value="{{bill.path}}" [(ngModel)]="bill.path"> -->
+					<img [src]="src" [hidden]="!src"><br> <input type="file"
+						imageUpload (imageSelected)="selected($event,bill)" 
+						[resizeOptions]="resizeOptions" ></td>
+				<td><input class="col-md-10 col-sm-10 col-xs-10" type="date"
+					value="{{bill.billDate}}" [(ngModel)]="bill.billDate"></td>
+			</tr>
+			<div class="pull-right">
+				<button class="btn btn-primary pull-right" *ngIf="checkEdit()"
+					(click)="reSubmit()">Resubmit</button>	
+
+			</div>
+
+		</tbody>
+		<tbody *ngIf="!checkEdit()">
+			<tr *ngFor="let bill of bills">
+				<td>{{bill.billNo}}</td>
+				<td>{{bill.billType}}</td>
+				<td>{{bill.amount}}</td>
+				<td><img src={{bill.path}}/></td>
+				<td>{{bill.billDate}}</td>
+			</tr>
+		</tbody>
+
+	</table>
+
+	<button type="button" class="btn btn-danger pull-right"
+		*ngIf="checkEdit()">Edit</button>
+</div>

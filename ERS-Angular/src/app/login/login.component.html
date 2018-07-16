@@ -1,0 +1,39 @@
+<div class="wrapper">
+	<form class="form-signin" (ngSubmit)="login()" [formGroup]="loginForm">
+		<h2 class="form-signin-heading">Please login</h2>
+		<div
+			[ngClass]="{'has-error': (loginForm.get('employeeId').touched || 
+                                              loginForm.get('employeeId').dirty) &&
+                                              !loginForm.get('employeeId').valid }">
+			<input type="text" class="form-control" name="empId"
+				placeholder="Employee ID" required="" autofocus=""
+				formControlName="employeeId" /> <span class="help-block"
+				*ngIf="(loginForm.get('employeeId').touched || 
+                                                         loginForm.get('employeeId').dirty) && 
+                                                         loginForm.get('employeeId').errors">
+				<span *ngIf="loginForm.get('employeeId').errors.required">
+					Please enter your Employee Id. </span>
+			</span>
+		</div>
+		<br>
+		<div
+			[ngClass]="{'has-error': (loginForm.get('password').touched || 
+                                              loginForm.get('password').dirty) &&
+                                              !loginForm.get('password').valid }">
+
+			<input type="password" class="form-control" name="password"
+				placeholder="Password" required="" formControlName="password" />
+			<span class="help-block"
+				*ngIf="(loginForm.get('password').touched || 
+                                                         loginForm.get('password').dirty) && 
+                                                         loginForm.get('password').errors">
+				<span *ngIf="loginForm.get('password').errors.required">
+					Please enter your password. </span>
+			</span>
+		</div>
+		<!--<label class="checkbox">
+        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+      </label>-->
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+	</form>
+</div>

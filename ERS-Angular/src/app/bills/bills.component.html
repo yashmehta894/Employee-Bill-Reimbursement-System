@@ -1,0 +1,34 @@
+<div class="conatiner-fluid">
+	<div class="responstable">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th *ngFor="let column of billsColumn">{{column}}</th>
+				</tr>
+			</thead>
+			<tbody *ngIf="!checkEdit()">
+				<tr *ngFor="let bill of bills">
+					<td><input type="text" value="{{bill.billNo}}"></td>
+					<td><input type="text" value="{{bill.billType}}"></td>
+					<td><input type="text" value="{{bill.billId}}"></td>
+					<td><input type="text" value="{{bill.amount}}"></td>
+					<td><input type="file" value="{{bill.path}}"></td>
+					<td><input type="text" value="{{bill.billDate}}"></td>
+				</tr>
+			</tbody>
+			<tbody *ngIf="checkEdit()">
+				<tr *ngFor="let bill of bills">
+					<td>{{bill.billNo}}</td>
+					<td>{{bill.billType}}</td>
+					<td>{{bill.billId}}</td>
+					<td>{{bill.amount}}</td>
+					<td><img src={{bill.path}}/></td>
+					<td>{{bill.billDate}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- 
+  <button class="btn btn-primary pull-right" *ngIf="checkEdit()"> Resubmit</button>
+  <button type="button" class="btn btn-danger pull-right" *ngIf="checkEdit()">Edit</button> -->
+</div>

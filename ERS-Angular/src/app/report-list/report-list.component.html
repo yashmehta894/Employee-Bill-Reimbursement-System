@@ -1,0 +1,133 @@
+<!--<div class="item-margin ">
+  <div class="container">
+    <div class="row">      
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2" style="text-align:center">ReportId</div>
+        <div class="col-md-2" style="text-align:center">Date Of Submission</div>
+        <div class="col-md-1" style="text-align:center">Status</div>
+        <div class="col-md-2" style="text-align:center">Amount</div>
+        <div class="col-md-2" style="text-align:center">ApprovedBy</div>
+        <div class="col-md-2" style="text-align:center">Costcenter</div>
+      </div>
+  </div>
+  <report *ngFor="let report of reports" [report]="report"></report>
+
+</div>
+-->
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+			<div>
+				<div class="panel panel-default" style="margin-top: 100px">
+					<div class="panel-heading">See more Reports</div>
+					<div class="panel-body">
+						<form #level="ngForm">
+							<div class="form-group" class="text-center">
+								<label for="level">Level</label> <select class="form-control"
+									ngModel name="level" id="sel1"
+									(change)="getReportByLevelAndCostCenter(level)">
+									<option *ngFor='let level of levels'>{{level}}</option>
+								</select>
+							</div>
+							<br />
+							<div class="form-group" class="text-center">
+								<!-- <label for="costCenter">Cost Center <input style="margin-left:10px" type="text"
+									[value]="costCenter" disabled /></label> -->
+								<label for="costCenter" style="margin: 10px">Cost Center
+								</label> <br />
+								<p class="badge">{{costCenter}}</p>
+							</div>
+
+						</form>
+					</div>
+				</div>
+				<label for="switch">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Switch
+					to Submiiter window</label> <br /> <span class="pull-right"> <a
+					class="btn btn-primary" [routerLink]="goToSubmitter()">Submit
+						Bills</a>
+				</span>
+			</div>
+		</div>
+		<div class=" col-md-9 ">
+			<div class="table-users">
+				<div class="header">Reports</div>
+				<table cellspacing="0">
+					<thead>
+						<tr>
+							<th>Report Id</th>
+							<th>Employee Name</th>
+							<th>Date Of Submission</th>
+							<th>Status</th>
+							<th>Amount</th>
+							<th>Accept</th>
+							<th>Reject</th>
+							<th>Details</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let report of reports">
+							<td>{{report.reportId}}</td>
+							<td>{{report.employee.name}}</td>
+							<td>{{report.date}}</td>
+							<td>{{report.status}}</td>
+							<td>{{report.totalAmount}}</td>
+							<td (click)='updateReport(report,"APPROVED")' data-toggle="modal"
+								data-target="#myModal"><i class="fa fa-check-circle fa-2x"
+								aria-hidden="true"></i></td>
+							<td (click)='updateReport(report, "APPROVER_REJECTED")'
+								data-toggle="modal" data-target="#myModal"><i
+								class="fa fa-times-circle fa-2x" aria-hidden="true"></i></td>
+							<button type="button" class="btn btn-primary"
+								[id]="report.ReportId"
+								(click)="Billdetails(report.reportId,report.status)">{{detailsButton}}</button>
+							<!--<button type="button" class="btn btn-danger pull-right" *ngIf="checkEdit(report.Status)">Edit</button>-->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+			<bills *ngIf="viewBills" [reportId]="currentReportId"
+				[reportStatus]="currentReportStatus" [bills]="bills"></bills>
+			<span class="pull-right">
+				<button *ngIf="viewBills" class="btn btn-primary" type="button"
+					(click)="hideBillDetails()">Hide</button>
+			</span>
+		</div>
+
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Please add a comment,</h4>
+			</div>
+			<form #comment="ngForm">
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label for="comment">Comment:</label>
+						<textarea class="form-control" rows="5" id="comment"
+							name="comment" ngModel></textarea>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default"
+						(click)="addComment(comment)">Submit</button>
+					<button type="button" class="btn btn-default"
+						(click)="addComment(comment)" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
